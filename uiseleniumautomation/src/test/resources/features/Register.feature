@@ -18,5 +18,19 @@ Feature: register functionality
     When user click on logout link
 
     Examples: 
-      | firstname | lastName | email               | password    | role     |
+      | firstname | lastName | email                      | password    | role     |
       | KUDIKALA  | RAMESH   | supertesting2309@YAHOO.COM | TESTING@123 | Employee |
+
+  @regression @MBA-T2
+  Scenario: Verify register functionality with empty data
+    When user click on register link
+    Then verify the register page title "Register"
+    When user clear data from register fields
+    And user click on Register button
+    Then user verify the validation error messages
+      | errormessage                            |
+      | First name is required.                 |
+      | Last name is required.                  |
+      | Invalid email format.                   |
+      | Password must be at least 6 characters. |
+      | Please select a role.                   |

@@ -29,6 +29,5 @@ public class Hooks {
     @After
     public void closeBrowser(Scenario scenario) {
         ScreenshotUtil.takeScreenshot(scenario);
-        WebDriverManager.getDriver().close();
     }
 }

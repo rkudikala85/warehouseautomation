@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
 		plugin = { "pretty",
 		"json:target/cucumber.json", // This must match the path in pom.xml
 		"html:target/cucumber-html-report" }, 
-		tags = "@functional")
+		tags = "@regression")
 
 public class CucumberTestRunner extends AbstractTestNGCucumberTests {
 	@Override
