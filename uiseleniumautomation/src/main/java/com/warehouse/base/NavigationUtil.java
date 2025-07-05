@@ -38,5 +38,8 @@ public class NavigationUtil {
         }
     }
 
+    public static String getElementText(WebElement element) {
+    	return element.getText();
+    }
     // Frame, Windows, Alerts to be implemented as needed
 }

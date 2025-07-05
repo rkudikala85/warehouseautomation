@@ -1,5 +1,10 @@
 package com.warehouse.stepdef;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -66,5 +71,32 @@ public class RegisterStepDefinition {
 	@When("user click on logout link")
 	public void user_click_on_logout_link() {
 		dashboardPage.clickLogoutLink();
+	}
+
+	@When("user clear data from register fields")
+	public void user_clear_data_from_register_fields() {
+		registerPage.clearRegisterFields();
+	}
+
+	@Then("user verify the validation error messages")
+	public void user_verify_the_validation_error_messages(io.cucumber.datatable.DataTable dataTable) {
+	    List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+	    List<String> expectedMessages = new ArrayList<>();
+
+	    for (Map<String, String> row : data) {
+	        expectedMessages.add(row.get("errormessage")); // 'errormessage' is the header in the feature file
+	    }
+
+	    List<String> actualMessages = Arrays.asList(
+	        registerPage.getFirstNameErrorMessage(),
+	        registerPage.getLastNameErrorMessage(),
+	        registerPage.getEmailErrorMessage(),
+	        registerPage.getPasswordErrorMessage(),
+	        registerPage.getRoleErrorMessage()
+	    );
+
+	    for (String expectedMsg : expectedMessages) {
+	        Assert.assertTrue(actualMessages.contains(expectedMsg), "Expected message not found: " + expectedMsg);
+	    }
 	}
 }

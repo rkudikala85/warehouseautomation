@@ -19,8 +19,9 @@ public class ScreenshotUtil {
  	        byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
  	        scenario.attach(screenshot, "image/png", scenario.getName());
             ((JavascriptExecutor) WebDriverManager.getDriver()).executeScript("sauce:job-result=" + (scenario.isFailed() ? "failed" : "passed"));
+           
 
  	    }
- 	  
+    	 WebDriverManager.getDriver().quit();
     }
 }
